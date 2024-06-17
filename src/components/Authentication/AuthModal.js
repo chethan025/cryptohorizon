@@ -8,8 +8,8 @@ import Login from "./Login";
 import { useState } from "react";
 import { CryptoState } from "../../CryptoContext";
 import { auth } from "../../firebase";
-import GoogleButton from "react-google-button";
-import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+
+import { signInWithPopup } from "firebase/auth";
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -22,15 +22,6 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.paper,
     color: "white",
     borderRadius: 10,
-  },
-  google: {
-    padding: 24,
-    paddingTop: 0,
-    display: "flex",
-    flexDirection: "column",
-    textAlign: "center",
-    gap: 20,
-    fontSize: 20,
   },
 }));
 
@@ -54,28 +45,8 @@ export default function AuthModal() {
     setValue(newValue);
   };
 
-  const googleProvider = new GoogleAuthProvider();
 
-  const signInWithGoogle = () => {
-    signInWithPopup(auth, googleProvider)
-      .then((res) => {
-        setAlert({
-          open: true,
-          message: `Sign Up Successful. Welcome ${res.user.email}`,
-          type: "success",
-        });
 
-        handleClose();
-      })
-      .catch((error) => {
-        setAlert({
-          open: true,
-          message: error.message,
-          type: "error",
-        });
-        return;
-      });
-  };
 
   return (
     <div>
